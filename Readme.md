@@ -6,8 +6,6 @@ You can download and purchase the plugin here:
 
 https://ghostnoteaudio.uk/products/cloudseed
 
-![User Interface](interface.png)
-
 The plugin itself is not open source, but the core reverb algorithm is.
 
 This repository contains all the necessary code to integrate the Cloud Seed algorithm into your application.
