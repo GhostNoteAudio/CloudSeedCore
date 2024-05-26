@@ -2,9 +2,9 @@
 
 This is the core DSP code of Cloud Seed 2.0
 
-You can download and purchase the plugin here:
+**You can download and purchase the plugin here:**
 
-https://ghostnoteaudio.uk/products/cloudseed
+**https://ghostnoteaudio.uk/products/cloudseed**
 
 The plugin itself is not open source, but the core reverb algorithm is.
 
