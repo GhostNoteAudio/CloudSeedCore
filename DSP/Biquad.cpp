@@ -72,18 +72,25 @@ namespace Cloudseed
 
 	void Biquad::SetGainDb (float value)
 	{
-    		value = std::clamp (value, -60.0f, 60.0f); // Clamp value between -60 and 60
+			// Clamp value between -60 and 60
+			if (value < -60)
+				value = -60;
+			else if (value > 60)
+				value = 60;
 
-    		gainDB = value;
-    		gain = powf (10.0f, value / 20.0f);
+			gainDB = value;
+			gain = powf (10.0f, value / 20.0f);
 	}
 
 	void Biquad::SetGain (float value)
 	{
-    		value = std::clamp (value, 0.001f, 1000.0f); // Clamp value between 0.001 and 1000
+		if (value < 0.001f)
+			value = 0.001f; // -60dB
+		else if (value > 1000.0f)
+			value = 1000.0f; // 60dB
 
-    		gain = value;
-    		gainDB = log10f (gain) * 20;
+		gain = value;
+		gainDB = log10f (gain) * 20;
 	}
 
 	float Biquad::GetQ()
