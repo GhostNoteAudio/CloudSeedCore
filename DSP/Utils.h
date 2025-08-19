@@ -59,20 +59,20 @@ namespace Cloudseed
                 target[i] += source[i] * gain;
         }
 
-        inline float DB2Gainf(float input)
+        inline constexpr float DB2Gainf(float input)
         {
             //return std::pow(10.0f, input / 20.0f);
             return powf(10, input * 0.05f);
         }
 
         template<typename T>
-        inline double DB2Gain(T input)
+        inline constexpr double DB2Gain(T input)
         {
             return pow10f(input / 20.0);
         }
 
         template<typename T>
-        inline double Gain2DB(T input)
+        inline constexpr double Gain2DB(T input)
         {
             //if (input < 0.0000001)
             //    return -100000;
@@ -80,33 +80,33 @@ namespace Cloudseed
             return 20.0f * log10f(input);
         }
 
-        const float dec1Mult = (10 / 9.0) * 0.1;
-        const float dec2Mult = (100 / 99.0) * 0.01;
-        const float dec3Mult = (1000 / 999.0) * 0.001;
-        const float dec4Mult = (10000 / 9999.0) * 0.0001;
+        constexpr float dec1Mult = (10 / 9.0) * 0.1;
+        constexpr float dec2Mult = (100 / 99.0) * 0.01;
+        constexpr float dec3Mult = (1000 / 999.0) * 0.001;
+        constexpr float dec4Mult = (10000 / 9999.0) * 0.0001;
 
-        const float oct1Mult = (2 / 1.0) * 0.5;
-        const float oct2Mult = (4 / 3.0) * 0.25;
-        const float oct3Mult = (8 / 7.0) * 0.125;
-        const float oct4Mult = (16 / 15.0) * 0.0625;
-        const float oct5Mult = (32 / 31.0) * 0.03125;
-        const float oct6Mult = (64 / 63.0) * 0.015625;
-        const float oct7Mult = (128 / 127.0) * 0.0078125;
-        const float oct8Mult = (256 / 255.0) * 0.00390625;
+        constexpr float oct1Mult = (2 / 1.0) * 0.5;
+        constexpr float oct2Mult = (4 / 3.0) * 0.25;
+        constexpr float oct3Mult = (8 / 7.0) * 0.125;
+        constexpr float oct4Mult = (16 / 15.0) * 0.0625;
+        constexpr float oct5Mult = (32 / 31.0) * 0.03125;
+        constexpr float oct6Mult = (64 / 63.0) * 0.015625;
+        constexpr float oct7Mult = (128 / 127.0) * 0.0078125;
+        constexpr float oct8Mult = (256 / 255.0) * 0.00390625;
 
-        inline float Resp1dec(float x) { return (powf(10, x) - 1) * dec1Mult; }
-        inline float Resp2dec(float x) { return (powf(10, 2 * x) - 1) * dec2Mult; }
-        inline float Resp3dec(float x) { return (powf(10, 3 * x) - 1) * dec3Mult; }
-        inline float Resp4dec(float x) { return (powf(10, 4 * x) - 1) * dec4Mult; }
+        inline constexpr float Resp1dec(float x) { return (powf(10, x) - 1) * dec1Mult; }
+        inline constexpr float Resp2dec(float x) { return (powf(10, 2 * x) - 1) * dec2Mult; }
+        inline constexpr float Resp3dec(float x) { return (powf(10, 3 * x) - 1) * dec3Mult; }
+        inline constexpr float Resp4dec(float x) { return (powf(10, 4 * x) - 1) * dec4Mult; }
 
-        inline float Resp1oct(float x) { return (powf(2, x) - 1) * oct1Mult; }
-        inline float Resp2oct(float x) { return (powf(2, 2 * x) - 1) * oct2Mult; }
-        inline float Resp3oct(float x) { return (powf(2, 3 * x) - 1) * oct3Mult; }
-        inline float Resp4oct(float x) { return (powf(2, 4 * x) - 1) * oct4Mult; }
-        inline float Resp5oct(float x) { return (powf(2, 5 * x) - 1) * oct5Mult; }
-        inline float Resp6oct(float x) { return (powf(2, 6 * x) - 1) * oct6Mult; }
-        inline float Resp7oct(float x) { return (powf(2, 7 * x) - 1) * oct7Mult; }
-        inline float Resp8oct(float x) { return (powf(2, 8 * x) - 1) * oct8Mult; }
+        inline constexpr float Resp1oct(float x) { return (powf(2, x) - 1) * oct1Mult; }
+        inline constexpr float Resp2oct(float x) { return (powf(2, 2 * x) - 1) * oct2Mult; }
+        inline constexpr float Resp3oct(float x) { return (powf(2, 3 * x) - 1) * oct3Mult; }
+        inline constexpr float Resp4oct(float x) { return (powf(2, 4 * x) - 1) * oct4Mult; }
+        inline constexpr float Resp5oct(float x) { return (powf(2, 5 * x) - 1) * oct5Mult; }
+        inline constexpr float Resp6oct(float x) { return (powf(2, 6 * x) - 1) * oct6Mult; }
+        inline constexpr float Resp7oct(float x) { return (powf(2, 7 * x) - 1) * oct7Mult; }
+        inline constexpr float Resp8oct(float x) { return (powf(2, 8 * x) - 1) * oct8Mult; }
        
     }
 }
