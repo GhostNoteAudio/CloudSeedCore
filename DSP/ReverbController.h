@@ -22,7 +22,6 @@ THE SOFTWARE.
 
 #pragma once
 
-#include <vector>
 #include "../Parameters.h"
 #include "ReverbChannel.h"
 #include "AllpassDiffuser.h"

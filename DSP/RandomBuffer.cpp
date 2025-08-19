@@ -26,32 +26,29 @@ THE SOFTWARE.
 
 namespace Cloudseed
 {
-	std::vector<float> RandomBuffer::Generate(uint64_t seed, int count)
+	void RandomBuffer::Generate(uint64_t seed, float* output, int count)
 	{
 		LcgRandom rand(seed);
-		std::vector<float> output;
 
 		for (int i = 0; i < count; i++)
 		{
 			unsigned int val = rand.NextUInt();
 			float fVal = val / (float)UINT_MAX;
-			output.push_back(fVal);
+			output[i] = fVal;
 		}
-
-		return output;
 	}
 
-	std::vector<float> RandomBuffer::Generate(uint64_t seed, int count, float crossSeed)
+	void RandomBuffer::Generate(uint64_t seed, float* output, int count, float crossSeed)
 	{
-		auto seedA = seed;
-		auto seedB = ~seed;
-		auto seriesA = Generate(seedA, count);
-		auto seriesB = Generate(seedB, count);
+		uint64_t seedA = seed;
+		uint64_t seedB = ~seed;
+		float seriesA[count];
+		float seriesB[count];
 
-		std::vector<float> output;
+		Generate(seedA, seriesA, count);
+		Generate(seedB, seriesB, count);
+
 		for (int i = 0; i < count; i++)
-			output.push_back(seriesA[i] * (1 - crossSeed) + seriesB[i] * crossSeed);
-
-		return output;
+			output[i] = seriesA[i] * (1 - crossSeed) + seriesB[i] * crossSeed;
 	}
 }

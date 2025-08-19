@@ -22,7 +22,6 @@ THE SOFTWARE.
 
 #pragma once
 
-#include <vector>
 #include <stdint.h>
 
 namespace Cloudseed
@@ -30,7 +29,7 @@ namespace Cloudseed
 	class RandomBuffer
 	{
 	public:
-		static std::vector<float> Generate(uint64_t seed, int count);
-		static std::vector<float> Generate(uint64_t seed, int count, float crossSeed);
+		static void Generate(uint64_t seed, float* output, int count);
+		static void Generate(uint64_t seed, float* output, int count, float crossSeed);
 	};
 }

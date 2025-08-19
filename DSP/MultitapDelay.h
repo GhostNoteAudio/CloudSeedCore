@@ -22,9 +22,6 @@ THE SOFTWARE.
 
 #pragma once
 
-#include <vector>
-#include <memory>
-#include <array>
 #include <cmath>
 #include "Utils.h"
 #include "RandomBuffer.h"
@@ -43,7 +40,7 @@ namespace Cloudseed
 		float tapGains[MaxTaps] = { 0 };
 		float tapPosition[MaxTaps] = { 0 };
 
-		std::vector<float> seedValues;
+		float seedValues[MaxTaps * 3];
 
 		int writeIdx;
 		int seed;
@@ -143,7 +140,7 @@ namespace Cloudseed
 
 		void UpdateSeeds()
 		{
-			this->seedValues = RandomBuffer::Generate(seed, MaxTaps * 3, crossSeed);
+			RandomBuffer::Generate(seed, seedValues, MaxTaps * 3, crossSeed);
 			Update();
 		}
 	};

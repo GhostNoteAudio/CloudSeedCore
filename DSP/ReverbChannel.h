@@ -22,8 +22,6 @@ THE SOFTWARE.
 
 #pragma once
 
-#include <map>
-#include <memory>
 #include "../Parameters.h"
 #include "ModulatedDelay.h"
 #include "MultitapDelay.h"
@@ -390,7 +388,8 @@ namespace Cloudseed
 			auto lateDiffusionModAmount = Ms2Samples(paramsScaled[Parameter::LateDiffuseModAmount]);
 			auto lateDiffusionModRate = paramsScaled[Parameter::LateDiffuseModRate];
 
-			auto delayLineSeeds = RandomBuffer::Generate(delayLineSeed, TotalLineCount * 3, crossSeed);
+			float delayLineSeeds[TotalLineCount * 3];
+			RandomBuffer::Generate(delayLineSeed, delayLineSeeds, TotalLineCount * 3, crossSeed);
 
 			for (int i = 0; i < TotalLineCount; i++)
 			{

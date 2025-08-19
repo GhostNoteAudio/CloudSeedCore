@@ -22,7 +22,6 @@ THE SOFTWARE.
 
 #pragma once
 
-#include <vector>
 #include "ModulatedAllpass.h"
 #include "RandomBuffer.h"
 
@@ -39,7 +38,7 @@ namespace Cloudseed
 		ModulatedAllpass filters[MaxStageCount];
 		int delay;
 		float modRate;
-		std::vector<float> seedValues;
+		float seedValues[MaxStageCount * 3];
 		int seed;
 		float crossSeed;
 
@@ -155,7 +154,7 @@ namespace Cloudseed
 
 		void UpdateSeeds()
 		{
-			this->seedValues = RandomBuffer::Generate(seed, MaxStageCount * 3, crossSeed);
+			RandomBuffer::Generate(seed, seedValues, MaxStageCount * 3, crossSeed);
 			Update();
 		}
 
