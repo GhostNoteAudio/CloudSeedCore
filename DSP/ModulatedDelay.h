@@ -32,8 +32,8 @@ namespace Cloudseed
 	{
 	private:
 
-		static const int ModulationUpdateRate = 8;
-		static const int DelayBufferSize = 192000 * 2;
+		static constexpr int ModulationUpdateRate = 8;
+		static constexpr int DelayBufferSize = 192000 * 2;
 
 		float delayBuffer[DelayBufferSize] = { 0 };
 		int writeIndex;

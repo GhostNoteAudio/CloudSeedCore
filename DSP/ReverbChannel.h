@@ -47,7 +47,7 @@ namespace Cloudseed
 	class ReverbChannel
 	{
 	private:
-		static const int TotalLineCount = 12;
+		static constexpr int TotalLineCount = 12;
 
 		double paramsScaled[Parameter::COUNT] = { 0.0 };
 		int samplerate;

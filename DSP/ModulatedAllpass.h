@@ -31,8 +31,8 @@ namespace Cloudseed
 	class ModulatedAllpass
 	{
 	public:
-		static const int DelayBufferSize = 19200; // 100ms at 192Khz
-		static const int ModulationUpdateRate = 8;
+		static constexpr int DelayBufferSize = 19200; // 100ms at 192Khz
+		static constexpr int ModulationUpdateRate = 8;
 
 	private:
 		float delayBuffer[DelayBufferSize] = { 0 };

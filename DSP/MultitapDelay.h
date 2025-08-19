@@ -34,8 +34,8 @@ namespace Cloudseed
 	class MultitapDelay
 	{
 	public:
-		static const int MaxTaps = 256;
-		static const int DelayBufferSize = 192000 * 2;
+		static constexpr int MaxTaps = 256;
+		static constexpr int DelayBufferSize = 192000 * 2;
 
 	private:
 		float delayBuffer[DelayBufferSize] = { 0 };

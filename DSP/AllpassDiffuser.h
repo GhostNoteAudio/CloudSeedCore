@@ -31,7 +31,7 @@ namespace Cloudseed
 	class AllpassDiffuser
 	{
 	public:
-		static const int MaxStageCount = 12;
+		static constexpr int MaxStageCount = 12;
 
 	private:
 		int samplerate;
