@@ -85,19 +85,14 @@ namespace Cloudseed
 
 		void Process(float* inL, float* inR, float* outL, float* outR, int bufSize)
 		{
-			float outLTemp[BUFFER_SIZE];
-			float outRTemp[BUFFER_SIZE];
-
 			while (bufSize > 0)
 			{
 				int subBufSize = bufSize > BUFFER_SIZE ? BUFFER_SIZE : bufSize;
-				ProcessChunk(inL, inR, outLTemp, outRTemp, subBufSize);
-				Utils::Copy(outL, outLTemp, subBufSize);
-				Utils::Copy(outR, outRTemp, subBufSize);
-				inL = &inL[subBufSize];
-				inR = &inR[subBufSize];
-				outL = &outL[subBufSize];
-				outR = &outR[subBufSize];
+				ProcessChunk(inL, inR, outL, outR, subBufSize);
+				inL += subBufSize;
+				inR += subBufSize;
+				outL += subBufSize;
+				outR += subBufSize;
 				bufSize -= subBufSize;
 			}
 		}
