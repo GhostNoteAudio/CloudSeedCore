@@ -54,7 +54,6 @@ namespace Cloudseed
 		MultitapDelay multitap;
 		AllpassDiffuser diffuser;
 		DelayLine lines[TotalLineCount];
-		RandomBuffer rand;
 		Hp1 highPass;
 		Lp1 lowPass;
 
