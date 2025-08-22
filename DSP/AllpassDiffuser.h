@@ -125,14 +125,10 @@ namespace Cloudseed
 
 		void Process(float* input, float* output, int bufSize)
 		{
-			float tempBuffer[BUFFER_SIZE];
-
-			filters[0].Process(input, tempBuffer, bufSize);
+			filters[0].Process(input, output, bufSize);
 
 			for (int i = 1; i < Stages; i++)
-				filters[i].Process(tempBuffer, tempBuffer, bufSize);
-			
-			Utils::Copy(output, tempBuffer, bufSize);
+				filters[i].Process(output, output, bufSize);
 		}
 
 		void ClearBuffers()
