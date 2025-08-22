@@ -169,11 +169,7 @@ namespace Cloudseed
 			if (ModAmount >= SampleDelay) // don't modulate to negative value
 				ModAmount = SampleDelay - 1;
 
-
 			auto totalDelay = SampleDelay + ModAmount * mod;
-
-			if (totalDelay <= 0) // should no longer be required
-				totalDelay = 1;
 
 			delayA = (int)totalDelay;
 			delayB = (int)totalDelay + 1;
