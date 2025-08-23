@@ -31,8 +31,8 @@ namespace Cloudseed
 	class ModulatedAllpass
 	{
 	public:
-		static const int DelayBufferSize = 19200; // 100ms at 192Khz
-		static const int ModulationUpdateRate = 8;
+		static constexpr int DelayBufferSize = 19200; // 100ms at 192Khz
+		static constexpr int ModulationUpdateRate = 8;
 
 	private:
 		float delayBuffer[DelayBufferSize] = { 0 };
@@ -161,19 +161,15 @@ namespace Cloudseed
 		void Update()
 		{
 			modPhase += ModRate * ModulationUpdateRate;
-			if (modPhase > 1)
-				modPhase = std::fmod(modPhase, 1.0);
+			if (modPhase > 1.0f)
+				modPhase -= (int)modPhase;
 
 			auto mod = std::sinf(modPhase * 2 * M_PI);
 
 			if (ModAmount >= SampleDelay) // don't modulate to negative value
 				ModAmount = SampleDelay - 1;
 
-
 			auto totalDelay = SampleDelay + ModAmount * mod;
-
-			if (totalDelay <= 0) // should no longer be required
-				totalDelay = 1;
 
 			delayA = (int)totalDelay;
 			delayB = (int)totalDelay + 1;

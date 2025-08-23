@@ -33,9 +33,9 @@ namespace Cloudseed
 		uint64_t a;
 		uint64_t c;
 
-		double doubleInv;
-		float floatUintInv;
-		float floatIntInv;
+		static constexpr double doubleInv = 1.0 / UINT32_MAX;
+		static constexpr float floatUintInv = 1.0 / UINT32_MAX;
+		static constexpr float floatIntInv = 1.0 / INT32_MAX;
 
 	public:
 		inline LcgRandom(uint64_t seed = 0)
@@ -43,10 +43,6 @@ namespace Cloudseed
 			x = seed;
 			a = 22695477;
 			c = 1;
-
-			doubleInv = 1.0 / (double)UINT32_MAX;
-			floatUintInv = 1.0 / (float)UINT32_MAX;
-			floatIntInv = 1.0 / (float)INT32_MAX;
 		}
 
 		inline void SetSeed(uint64_t seed)

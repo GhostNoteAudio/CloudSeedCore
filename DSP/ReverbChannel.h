@@ -22,8 +22,6 @@ THE SOFTWARE.
 
 #pragma once
 
-#include <map>
-#include <memory>
 #include "../Parameters.h"
 #include "ModulatedDelay.h"
 #include "MultitapDelay.h"
@@ -47,7 +45,7 @@ namespace Cloudseed
 	class ReverbChannel
 	{
 	private:
-		static const int TotalLineCount = 12;
+		static constexpr int TotalLineCount = 12;
 
 		double paramsScaled[Parameter::COUNT] = { 0.0 };
 		int samplerate;
@@ -56,7 +54,6 @@ namespace Cloudseed
 		MultitapDelay multitap;
 		AllpassDiffuser diffuser;
 		DelayLine lines[TotalLineCount];
-		RandomBuffer rand;
 		Hp1 highPass;
 		Lp1 lowPass;
 
@@ -390,7 +387,8 @@ namespace Cloudseed
 			auto lateDiffusionModAmount = Ms2Samples(paramsScaled[Parameter::LateDiffuseModAmount]);
 			auto lateDiffusionModRate = paramsScaled[Parameter::LateDiffuseModRate];
 
-			auto delayLineSeeds = RandomBuffer::Generate(delayLineSeed, TotalLineCount * 3, crossSeed);
+			float delayLineSeeds[TotalLineCount * 3];
+			RandomBuffer::Generate(delayLineSeed, delayLineSeeds, TotalLineCount * 3, crossSeed);
 
 			for (int i = 0; i < TotalLineCount; i++)
 			{

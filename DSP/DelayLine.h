@@ -44,8 +44,8 @@ namespace Cloudseed
 
 		void Reset()
 		{
-			for (int i = 0; i < N; i++)
-				buffer[i] = 0.0f;
+			memset(buffer, 0, sizeof buffer);
+
 			idxRead = 0;
 			idxWrite = 0;
 			count = 0;
