@@ -21,6 +21,7 @@ THE SOFTWARE.
 */
 
 #include <climits>
+#include <cstddef>
 #include "RandomBuffer.h"
 #include "LcgRandom.h"
 
@@ -30,7 +31,7 @@ namespace Cloudseed
 	{
 		LcgRandom rand(seed);
 		std::vector<float> output;
-		output.reserve((size_t)count);
+		output.reserve(static_cast<std::size_t>(count));
 
 		for (int i = 0; i < count; i++)
 		{
@@ -50,7 +51,7 @@ namespace Cloudseed
 		auto seriesB = Generate(seedB, count);
 
 		std::vector<float> output;
-		output.reserve((size_t)count);
+		output.reserve(static_cast<std::size_t>(count));
 		for (int i = 0; i < count; i++)
 			output.push_back(seriesA[i] * (1 - crossSeed) + seriesB[i] * crossSeed);
 
