@@ -1,0 +1,19 @@
+add_library(CloudSeedCore STATIC
+    AllpassDiffuser.h
+    Biquad.cpp
+    Biquad.h
+    DelayLine.h
+    Hp1.h
+    LcgRandom.h
+    Lp1.h
+    ModulatedAllpass.h
+    ModulatedDelay.h
+    MultitapDelay.h
+    RandomBuffer.cpp
+    RandomBuffer.h
+    ReverbChannel.h
+    ReverbController.h
+    Utils.h
+    ../Parameters.cpp
+    ../Parameters.h
+)

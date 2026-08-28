@@ -1,0 +1,3 @@
+#pragma once
+
+#define MAX_BUFFER_SIZE ${CLOUDSEED_MAX_BUFFER_SIZE}

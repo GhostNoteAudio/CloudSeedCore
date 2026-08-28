@@ -38,7 +38,7 @@ namespace Cloudseed
 
 		ReverbChannel channelL;
 		ReverbChannel channelR;
-		double parameters[(int)Parameter::COUNT] = {0};
+		float parameters[(int)Parameter::COUNT] = {0};
 
 	public:
 		ReverbController(int samplerate) :
@@ -53,24 +53,28 @@ namespace Cloudseed
 			return samplerate;
 		}
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshadow"
+
 		void SetSamplerate(int samplerate)
 		{
 			this->samplerate = samplerate;
 			channelL.SetSamplerate(samplerate);
 			channelR.SetSamplerate(samplerate);
 		}
+#pragma clang diagnostic pop
 
 		int GetParameterCount()
 		{
 			return Parameter::COUNT;
 		}
 
-		double* GetAllParameters()
+		float* GetAllParameters()
 		{
 			return parameters;
 		}
 
-		void SetParameter(int paramId, double value)
+		void SetParameter(int paramId, float value)
 		{
 			parameters[paramId] = value;
 			auto scaled = ScaleParam(value, paramId);
@@ -86,12 +90,12 @@ namespace Cloudseed
 
 		void Process(float* inL, float* inR, float* outL, float* outR, int bufSize)
 		{
-			float outLTemp[BUFFER_SIZE];
-			float outRTemp[BUFFER_SIZE];
+			float outLTemp[MAX_BUFFER_SIZE];
+			float outRTemp[MAX_BUFFER_SIZE];
 
 			while (bufSize > 0)
 			{
-				int subBufSize = bufSize > BUFFER_SIZE ? BUFFER_SIZE : bufSize;
+				int subBufSize = bufSize > MAX_BUFFER_SIZE ? MAX_BUFFER_SIZE : bufSize;
 				ProcessChunk(inL, inR, outLTemp, outRTemp, subBufSize);
 				Utils::Copy(outL, outLTemp, subBufSize);
 				Utils::Copy(outR, outRTemp, subBufSize);
@@ -106,11 +110,11 @@ namespace Cloudseed
 	private:
 		void ProcessChunk(float* inL, float* inR, float* outL, float* outR, int bufSize)
 		{
-			float leftChannelIn[BUFFER_SIZE];
-			float rightChannelIn[BUFFER_SIZE];
+			float leftChannelIn[MAX_BUFFER_SIZE];
+			float rightChannelIn[MAX_BUFFER_SIZE];
 
 			float inputMix = ScaleParam(parameters[Parameter::InputMix], Parameter::InputMix);
-			float cm = inputMix * 0.5;
+			float cm = inputMix * 0.5f;
 			float cmi = (1 - cm);
 
 			for (int i = 0; i < bufSize; i++)

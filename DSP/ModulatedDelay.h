@@ -58,7 +58,7 @@ namespace Cloudseed
 			readIndexB = 0;
 			samplesProcessed = 0;
 
-			modPhase = 0.01 + 0.98 * (std::rand() / (float)RAND_MAX);
+			modPhase = static_cast<float>(0.01 + 0.98 * (std::rand() / (float)RAND_MAX));
 			gainA = 0;
 			gainB = 0;
 
@@ -103,9 +103,9 @@ namespace Cloudseed
 		{
 			modPhase += ModRate * ModulationUpdateRate;
 			if (modPhase > 1)
-				modPhase = std::fmod(modPhase, 1.0);
+				modPhase = std::fmod(modPhase, 1.0f);
 
-			auto mod = std::sinf(modPhase * 2 * M_PI);
+			auto mod = sinf(static_cast<float>(modPhase * 2 * M_PI));
 			auto totalDelay = SampleDelay + ModAmount * mod;
 
 			auto delayA = (int)totalDelay;

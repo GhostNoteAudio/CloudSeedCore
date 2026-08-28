@@ -34,7 +34,14 @@ The output is written to a raw binary file, which you can open using Audacity:
 * Channels: 1 Channel (mono)
 * Sample Rate: 48000 Hz
 
-## Preprocessor Definitions
+Using CMake:
+```
+    cmake -B ./build
+```
 
-    BUFFER_SIZE=1024 (or whatever you want the maximum supported buffer size to be)
+## Demo Preprocessor Definitions
+
     MAX_STR_SIZE=32 (maximum length of strings being formatted and returned)
+
+## Configurable Compile Time Definitions
+    CLOUDSEED_MAX_BUFFER_SIZE=1024 (Compile-time maximum supported buffer size)

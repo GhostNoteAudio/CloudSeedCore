@@ -22,7 +22,6 @@ THE SOFTWARE.
 
 #pragma once
 
-#define _USE_MATH_DEFINES
 #include <cmath>
 
 namespace Cloudseed
@@ -80,7 +79,7 @@ namespace Cloudseed
 			if (cutoffHz >= fs * 0.5f)
 				cutoffHz = fs * 0.499f;
 
-			auto x = 2.0f * M_PI * cutoffHz / fs;
+			auto x = static_cast<float>(2.0f * M_PI * cutoffHz / fs);
 			auto nn = (2.0f - cosf(x));
 			auto alpha = nn - sqrtf(nn * nn - 1);
 

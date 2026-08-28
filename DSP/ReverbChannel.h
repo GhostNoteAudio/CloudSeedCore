@@ -22,6 +22,9 @@ THE SOFTWARE.
 
 #pragma once
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshadow"
+
 #include <map>
 #include <memory>
 #include "../Parameters.h"
@@ -49,14 +52,13 @@ namespace Cloudseed
 	private:
 		static const int TotalLineCount = 12;
 
-		double paramsScaled[Parameter::COUNT] = { 0.0 };
+		float paramsScaled[Parameter::COUNT] = { 0.0 };
 		int samplerate;
 
 		ModulatedDelay preDelay;
 		MultitapDelay multitap;
 		AllpassDiffuser diffuser;
 		DelayLine lines[TotalLineCount];
-		RandomBuffer rand;
 		Hp1 highPass;
 		Lp1 lowPass;
 
@@ -116,7 +118,7 @@ namespace Cloudseed
 				SetParameter(i, paramsScaled[i]);
 		}
 
-		void SetParameter(int para, double scaledValue)
+		void SetParameter(int para, float scaledValue)
 		{
 			paramsScaled[para] = scaledValue;
 
@@ -287,7 +289,7 @@ namespace Cloudseed
 
 
 			case Parameter::EqCrossSeed:
-				crossSeed = channelLr == ChannelLR::Right ? 0.5 * scaledValue : 1 - 0.5 * scaledValue;
+				crossSeed = channelLr == ChannelLR::Right ? 0.5f * scaledValue : 1 - 0.5f * scaledValue;
 				multitap.SetCrossSeed(crossSeed);
 				diffuser.SetCrossSeed(crossSeed);
 				UpdateLines();
@@ -314,10 +316,10 @@ namespace Cloudseed
 
 		void Process(float* input, float* output, int bufSize)
 		{
-			float tempBuffer[BUFFER_SIZE];
-			float earlyOutBuffer[BUFFER_SIZE];
-			float lineOutBuffer[BUFFER_SIZE];
-			float lineSumBuffer[BUFFER_SIZE];
+			float tempBuffer[MAX_BUFFER_SIZE];
+			float earlyOutBuffer[MAX_BUFFER_SIZE];
+			float lineOutBuffer[MAX_BUFFER_SIZE];
+			float lineSumBuffer[MAX_BUFFER_SIZE];
 
 			Utils::Copy(tempBuffer, input, bufSize);
 
@@ -375,7 +377,7 @@ namespace Cloudseed
 	private:
 		float GetPerLineGain()
 		{
-			return 1.0 / std::sqrt(lineCount);
+			return 1.0f / sqrtf(lineCount);
 		}
 
 		void UpdateLines()
@@ -394,10 +396,10 @@ namespace Cloudseed
 
 			for (int i = 0; i < TotalLineCount; i++)
 			{
-				auto modAmount = lineModAmount * (0.7 + 0.3 * delayLineSeeds[i]);
-				auto modRate = lineModRate * (0.7 + 0.3 * delayLineSeeds[TotalLineCount + i]) / samplerate;
+				auto modAmount = lineModAmount * (0.7f + 0.3f * delayLineSeeds[i]);
+				auto modRate = lineModRate * (0.7f + 0.3f * delayLineSeeds[TotalLineCount + i]) / samplerate;
 
-				auto delaySamples = (0.5 + 1.0 * delayLineSeeds[TotalLineCount * 2 + i]) * lineDelaySamples;
+				auto delaySamples = (0.5f + 1.0f * delayLineSeeds[TotalLineCount * 2 + i]) * lineDelaySamples;
 				if (delaySamples < modAmount + 2) // when the delay is set really short, and the modulation is very high
 					delaySamples = modAmount + 2; // the mod could actually take the delay time negative, prevent that! -- provide 2 extra sample as margin of safety
 
@@ -426,3 +428,5 @@ namespace Cloudseed
 
 	};
 }
+
+#pragma clang diagnostic pop

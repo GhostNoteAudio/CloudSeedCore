@@ -23,6 +23,7 @@ THE SOFTWARE.
 #pragma once
 
 #include <vector>
+#include "config.h"
 #include "ModulatedAllpass.h"
 #include "RandomBuffer.h"
 
@@ -113,7 +114,7 @@ namespace Cloudseed
 		void SetModAmount(float amount)
 		{
 			for (int i = 0; i < MaxStageCount; i++)
-				filters[i].ModAmount = amount * (0.85 + 0.3 * seedValues[MaxStageCount + i]);
+				filters[i].ModAmount = static_cast<float>(amount * (0.85 + 0.3 * seedValues[MaxStageCount + i]));
 		}
 
 		void SetModRate(float rate)
@@ -121,12 +122,12 @@ namespace Cloudseed
 			modRate = rate;
 
 			for (int i = 0; i < MaxStageCount; i++)
-				filters[i].ModRate = rate * (0.85 + 0.3 * seedValues[MaxStageCount * 2 + i]) / samplerate;
+				filters[i].ModRate = static_cast<float>(rate * (0.85 + 0.3 * seedValues[MaxStageCount * 2 + i]) / samplerate);
 		}
 
 		void Process(float* input, float* output, int bufSize)
 		{
-			float tempBuffer[BUFFER_SIZE];
+			float tempBuffer[MAX_BUFFER_SIZE];
 
 			filters[0].Process(input, tempBuffer, bufSize);
 

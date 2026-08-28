@@ -25,6 +25,7 @@ THE SOFTWARE.
 #define _USE_MATH_DEFINES 1
 #include <math.h>
 #include <stdint.h>
+#include <string.h>
 
 namespace Cloudseed
 {
@@ -33,8 +34,7 @@ namespace Cloudseed
         template<typename T>
         inline void ZeroBuffer(T* buffer, int len)
         {
-            for (int i = 0; i < len; i++)
-                buffer[i] = 0;
+            memset(buffer, 0, len * sizeof(T));
         }
 
         template<typename T>
@@ -80,19 +80,19 @@ namespace Cloudseed
             return 20.0f * log10f(input);
         }
 
-        const float dec1Mult = (10 / 9.0) * 0.1;
-        const float dec2Mult = (100 / 99.0) * 0.01;
-        const float dec3Mult = (1000 / 999.0) * 0.001;
-        const float dec4Mult = (10000 / 9999.0) * 0.0001;
+        const float dec1Mult = (10 / 9.0f) * 0.1f;
+        const float dec2Mult = (100 / 99.0f) * 0.01f;
+        const float dec3Mult = (1000 / 999.0f) * 0.001f;
+        const float dec4Mult = (10000 / 9999.0f) * 0.0001f;
 
-        const float oct1Mult = (2 / 1.0) * 0.5;
-        const float oct2Mult = (4 / 3.0) * 0.25;
-        const float oct3Mult = (8 / 7.0) * 0.125;
-        const float oct4Mult = (16 / 15.0) * 0.0625;
-        const float oct5Mult = (32 / 31.0) * 0.03125;
-        const float oct6Mult = (64 / 63.0) * 0.015625;
-        const float oct7Mult = (128 / 127.0) * 0.0078125;
-        const float oct8Mult = (256 / 255.0) * 0.00390625;
+        const float oct1Mult = (2 / 1.0f) * 0.5f;
+        const float oct2Mult = (4 / 3.0f) * 0.25f;
+        const float oct3Mult = (8 / 7.0f) * 0.125f;
+        const float oct4Mult = (16 / 15.0f) * 0.0625f;
+        const float oct5Mult = (32 / 31.0f) * 0.03125f;
+        const float oct6Mult = (64 / 63.0f) * 0.015625f;
+        const float oct7Mult = (128 / 127.0f) * 0.0078125f;
+        const float oct8Mult = (256 / 255.0f) * 0.00390625f;
 
         inline float Resp1dec(float x) { return (powf(10, x) - 1) * dec1Mult; }
         inline float Resp2dec(float x) { return (powf(10, 2 * x) - 1) * dec2Mult; }

@@ -99,7 +99,7 @@ namespace Cloudseed
 		void Process(float* input, float* output, int bufSize)
 		{
 			float lengthScaler = lengthSamples / (float)count;
-			float totalGain = 3.0 / std::sqrtf(1 + count);
+			float totalGain = 3.0f / sqrtf(1 + count);
 			totalGain *= (1 + decay * 2);
 
 			for (int i = 0; i < bufSize; i++)
@@ -110,7 +110,7 @@ namespace Cloudseed
 				for (int j = 0; j < count; j++)
 				{
 					float offset = tapPosition[j] * lengthScaler;
-					float decayEffective = std::expf(-offset / lengthSamples * 3.3) * decay + (1-decay);
+					float decayEffective = expf(-offset / lengthSamples * 3.3f) * decay + (1-decay);
 					int readIdx = writeIdx - (int)offset;
 					if (readIdx < 0) readIdx += DelayBufferSize;
 

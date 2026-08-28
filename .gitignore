@@ -40,3 +40,4 @@ Releases/*
 !VC_redist.x64.exe
 outputLeft.bin
 outputRight.bin
+include/config.h
